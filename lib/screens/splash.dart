@@ -14,8 +14,8 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-   
-    Future.delayed(Duration(seconds: 5), () {
+
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(builder: (context) => Tabs()),
@@ -30,30 +30,26 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: RadialGradient(
-            center: Alignment.center,
-            radius: 1.5,
-            colors: [
-              Colors.blue.shade900.withOpacity(0.1),
-              Colors.purple.shade900.withOpacity(0.1),
-              Colors.black,
-            ],
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF3B2365), Color(0xFF2A1848), Colors.black],
           ),
         ),
         child: Center(
           child: Stack(
             alignment: Alignment.center,
             children: [
-             
               Container(
                     width: size.width * 0.9,
                     height: size.width * 0.9,
                     decoration: BoxDecoration(
                       gradient: RadialGradient(
                         colors: [
-                          Colors.blue.withOpacity(0.05),
-                          Colors.purple.withOpacity(0.05),
+                          Colors.purple.withOpacity(0.08),
                           Colors.transparent,
                         ],
                       ),
@@ -63,16 +59,13 @@ class _SplashState extends State<Splash> {
                     onPlay: (controller) => controller.repeat(reverse: true),
                   )
                   .scale(
-                    begin: Offset(0.8, 0.8),
-                    end: Offset(1.2, 1.2),
+                    begin: const Offset(0.85, 0.85),
+                    end: const Offset(1.15, 1.15),
                     duration: 4000.ms,
                     curve: Curves.easeInOut,
                   ),
 
-              AnimatedTextWithGradientOnly(
-                text: "استراحة",
-                size: size,
-              ),
+              AnimatedTextWithGradientOnly(text: "استراحة", size: size),
             ],
           ),
         ),
@@ -85,7 +78,11 @@ class AnimatedTextWithGradientOnly extends StatefulWidget {
   final String text;
   final Size size;
 
-  const AnimatedTextWithGradientOnly({required this.text, required this.size});
+  const AnimatedTextWithGradientOnly({
+    super.key,
+    required this.text,
+    required this.size,
+  });
 
   @override
   State<AnimatedTextWithGradientOnly> createState() =>
@@ -102,10 +99,9 @@ class _AnimatedTextWithGradientOnlyState
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
       vsync: this,
     )..repeat(reverse: true);
-
   }
 
   @override
@@ -124,7 +120,7 @@ class _AnimatedTextWithGradientOnlyState
         return ShaderMask(
           shaderCallback: (bounds) {
             return LinearGradient(
-              colors: [
+              colors: const [
                 Colors.blueAccent,
                 Colors.purpleAccent,
                 Colors.pinkAccent,
@@ -132,10 +128,9 @@ class _AnimatedTextWithGradientOnlyState
                 Colors.yellowAccent,
                 Colors.greenAccent,
               ],
-              stops: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
-              begin: Alignment(1.0 - gradientPosition * 2, 0.0),
-              end: Alignment(-1.0 + gradientPosition * 2, 0.0),
-              tileMode: TileMode.clamp,
+              stops: const [0, 0.2, 0.4, 0.6, 0.8, 1],
+              begin: Alignment(1.0 - gradientPosition * 2, 0),
+              end: Alignment(-1.0 + gradientPosition * 2, 0),
             ).createShader(bounds);
           },
           child: Text(
@@ -144,19 +139,18 @@ class _AnimatedTextWithGradientOnlyState
             style: TextStyle(
               fontSize: widget.size.width * 0.15,
               fontWeight: FontWeight.w900,
-              color: Colors.white,
               letterSpacing: 3,
-              fontFamily: 'Arial',
+              color: Colors.white,
               shadows: [
                 Shadow(
-                  color: Colors.black.withOpacity(0.5),
-                  blurRadius: 10,
-                  offset: Offset(2, 2),
+                  color: Colors.black.withOpacity(0.6),
+                  blurRadius: 15,
+                  offset: const Offset(3, 3),
                 ),
               ],
             ),
           ),
-        ).animate().fadeIn(duration: 1000.ms);
+        ).animate().fadeIn(duration: 1200.ms);
       },
     );
   }
