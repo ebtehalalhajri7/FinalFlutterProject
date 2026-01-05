@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice3/screens/splash.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,16 +8,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'إستراحه',
+      title: 'HyDE Series App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: const Color(0xFF3B2365),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B2365)),
       ),
-      home: Splash(),
+      home: const SplashScreen(), // first screen
     );
   }
 }
